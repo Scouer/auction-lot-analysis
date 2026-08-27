@@ -1,0 +1,11 @@
+{
+  "name": "antique-marketplace",
+  "owner": { "name": "Maxim (Scouer)" },
+  "plugins": [
+    {
+      "name": "antique",
+      "source": "./",
+      "description": "Разбор аукционных лотов: навык auction-lot-analysis — подлинность, сохранность, цена, потолок ставки, автор-база, формы отчёта."
+    }
+  ]
+}
