@@ -1,6 +1,6 @@
 {
   "name": "antique",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Разбор аукционных лотов: подлинность, сохранность, цена, потолок ставки. Навык auction-lot-analysis v2 с автор-базой, формами отчёта и режимами сред.",
   "author": { "name": "Maxim (Scouer)" },
   "repository": "https://github.com/Scouer/auction-lot-analysis",
