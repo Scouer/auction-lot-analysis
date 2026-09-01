@@ -16,7 +16,7 @@ description: >-
   Also trigger on English phrasing: auction lot, hammer price, estimate,
   provenance, is this authentic, should I bid.
 metadata:
-  version: "2.3.5"
+  version: "2.3.6"
 ---
 
 # Разбор аукционного лота — v2.3
@@ -351,7 +351,7 @@ platforms.md: добавить паттерн оригиналов LiveAuctionee
 Внести?
 ```
 
-**«Да»** → цикл релиза: правка в клоне `~/dev/auction-lot-analysis` (нет клона — `git clone https://github.com/Scouer/auction-lot-analysis`), bump версии в `.claude-plugin/plugin.json`, bump той же версии во фронтматтере SKILL.md и в `skill_version` формы отчёта, коммит, push, синк в vault `skill/`, и сразу подтянуть у себя: `claude plugin marketplace update antique-marketplace && claude plugin update antique@antique-marketplace` — тогда следующая сессия уже работает на новой версии. Плагин стоит из GitHub-маркетплейса `antique-marketplace`; хук на старте сессии делает то же подтягивание сам (страховка, в том числе на второй машине). Никаких пакетов-файлов. Строка в `lessons.md`: «внесено vX.Y.Z». **«Нет»** → «отклонено: причина», больше не предлагать. Среда C (репо недоступно) → «предложено» в хвосте и в `lessons.md`, вносит ближайшая M-сессия.
+**«Да»** → цикл релиза: правка в клоне `~/dev/auction-lot-analysis` (нет клона — `git clone https://github.com/Scouer/auction-lot-analysis`), bump версии в `.claude-plugin/plugin.json`, bump той же версии во фронтматтере SKILL.md и в `skill_version` формы отчёта, коммит, push, синк в vault `skill/`, и на этом релиз закончен: плагин стоит из личного маркетплейса `scouer` (репо `Scouer/claude-plugins`) с автообновлением, новая версия приезжает сама на следующем старте сессии на каждой машине; чтобы применить сразу — `claude plugin update antique@scouer`. Строка в `lessons.md`: «внесено vX.Y.Z». **«Нет»** → «отклонено: причина», больше не предлагать. Среда C (репо недоступно) → «предложено» в хвосте и в `lessons.md`, вносит ближайшая M-сессия.
 
 Раз в 15–20 лотов — сверка по `archive.md` (Калибровка); её выход — предложения в той же форме.
 
