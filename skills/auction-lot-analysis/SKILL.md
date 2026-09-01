@@ -16,7 +16,7 @@ description: >-
   Also trigger on English phrasing: auction lot, hammer price, estimate,
   provenance, is this authentic, should I bid.
 metadata:
-  version: "2.3.1"
+  version: "2.3.2"
 ---
 
 # Разбор аукционного лота — v2.3
@@ -37,7 +37,7 @@ metadata:
 в контекст возвращается только производная — счётчик, доля, таблица на десяток строк, вывод
 по кропу. Что можно получить кодом — получается кодом: вызов агента платный, вызов скрипта нет.
 
-Ответ по лоту не завершён, пока не выполнены Фазы 6 и 7. Профиль покупателя — `references/risk-profile.md`. Версия навыка пишется в хвост каждого отчёта.
+Ответ по лоту не завершён, пока не выполнены Фазы 6 и 7. Профиль покупателя — `references/risk-profile.md`; в пакете из GitHub его нет (личный файл, в репо не входит) — читать из vault `Projects/antique/skill/references/risk-profile.md`; нет и там → работать по нижнему сценарию и сказать об этом в шапке. Версия навыка пишется в хвост каждого отчёта.
 
 ---
 
@@ -351,7 +351,7 @@ platforms.md: добавить паттерн оригиналов LiveAuctionee
 Внести?
 ```
 
-**«Да»** → цикл релиза: правка в клоне `~/dev/auction-lot-analysis` (нет клона — `git clone https://github.com/Scouer/auction-lot-analysis`), bump версии в `.claude-plugin/plugin.json`, коммит, push, синк в vault `skill/`, сборка пакета `antique-<версия>.plugin` (файлы репо без `marketplace.json` и `.gitignore` + `risk-profile.md` из vault, zip от корня) в `~/Downloads` — и файлом владельцу: он загружает пакет в аккаунт сам, кнопки автообновления у плагина из файла нет; строка в `lessons.md`: «внесено vX.Y.Z». **«Нет»** → «отклонено: причина», больше не предлагать. Среда C (репо недоступно) → «предложено» в хвосте и в `lessons.md`, вносит ближайшая M-сессия.
+**«Да»** → цикл релиза: правка в клоне `~/dev/auction-lot-analysis` (нет клона — `git clone https://github.com/Scouer/auction-lot-analysis`), bump версии в `.claude-plugin/plugin.json`, bump той же версии во фронтматтере SKILL.md, коммит, push, синк в vault `skill/`, затем подтянуть: `claude plugin marketplace update antique-marketplace && claude plugin update antique@antique-marketplace` (плагин стоит из GitHub-маркетплейса `antique-marketplace`; применяется после перезапуска сессии). Никаких пакетов-файлов. Строка в `lessons.md`: «внесено vX.Y.Z». **«Нет»** → «отклонено: причина», больше не предлагать. Среда C (репо недоступно) → «предложено» в хвосте и в `lessons.md`, вносит ближайшая M-сессия.
 
 Раз в 15–20 лотов — сверка по `archive.md` (Калибровка); её выход — предложения в той же форме.
 
