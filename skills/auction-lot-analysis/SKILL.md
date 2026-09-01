@@ -16,7 +16,7 @@ description: >-
   Also trigger on English phrasing: auction lot, hammer price, estimate,
   provenance, is this authentic, should I bid.
 metadata:
-  version: "2.3.0"
+  version: "2.3.1"
 ---
 
 # Разбор аукционного лота — v2.3
@@ -351,7 +351,7 @@ platforms.md: добавить паттерн оригиналов LiveAuctionee
 Внести?
 ```
 
-**«Да»** → цикл релиза: правка в клоне `~/dev/auction-lot-analysis` (нет клона — `git clone https://github.com/Scouer/auction-lot-analysis`), bump версии в `.claude-plugin/plugin.json`, коммит, push, синк в vault `skill/`, владельцу — «жми Update»; строка в `lessons.md`: «внесено vX.Y.Z». **«Нет»** → «отклонено: причина», больше не предлагать. Среда C (репо недоступно) → «предложено» в хвосте и в `lessons.md`, вносит ближайшая M-сессия.
+**«Да»** → цикл релиза: правка в клоне `~/dev/auction-lot-analysis` (нет клона — `git clone https://github.com/Scouer/auction-lot-analysis`), bump версии в `.claude-plugin/plugin.json`, коммит, push, синк в vault `skill/`, сборка пакета `antique-<версия>.plugin` (файлы репо без `marketplace.json` и `.gitignore` + `risk-profile.md` из vault, zip от корня) в `~/Downloads` — и файлом владельцу: он загружает пакет в аккаунт сам, кнопки автообновления у плагина из файла нет; строка в `lessons.md`: «внесено vX.Y.Z». **«Нет»** → «отклонено: причина», больше не предлагать. Среда C (репо недоступно) → «предложено» в хвосте и в `lessons.md`, вносит ближайшая M-сессия.
 
 Раз в 15–20 лотов — сверка по `archive.md` (Калибровка); её выход — предложения в той же форме.
 
