@@ -161,6 +161,7 @@ truncated: false                   # цейтнот
 env: M|C|1K
 subagents: true
 degradations: []                   # [V1e, SYNC-DEBT, "рынок:3", ...]
+lessons: []                        # уроки плагину (Фаза 7): файл → правка → причина
 blind: physical|procedural|broken
 n_photos: "9/9"
 coverage: "6/8"
@@ -185,7 +186,7 @@ legal: {checked: [], gaps: [], cites: none}
 open_obligations_total: 0
 reopen: ""
 sync_debt: false
-skill_version: "2.0"
+skill_version: "2.3"
 tokens_est: 0
 hammer_actual: null                # постфактум, Калибровщик
 ```
