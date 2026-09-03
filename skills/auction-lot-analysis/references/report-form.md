@@ -186,7 +186,7 @@ legal: {checked: [], gaps: [], cites: none}
 open_obligations_total: 0
 reopen: ""
 sync_debt: false
-skill_version: "2.3.6"              # = version из plugin.json плагина; бампится с каждым релизом
+skill_version: "2.3.7"              # = version из plugin.json плагина; бампится с каждым релизом
 tokens_est: 0
 hammer_actual: null                # постфактум, Калибровщик
 ```
