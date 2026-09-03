@@ -16,7 +16,7 @@ description: >-
   Also trigger on English phrasing: auction lot, hammer price, estimate,
   provenance, is this authentic, should I bid.
 metadata:
-  version: "2.3.7"
+  version: "2.3.8"
 ---
 
 > **Канон владельца:** `~/.claude/CLAUDE.md` — прочитать перед работой; при конфликте он главнее этого файла. Доступы и ID — `~/.claude/registry.md`.

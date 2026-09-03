@@ -8,7 +8,7 @@ Vault `Vasily_Brain` (путь динамически; записи через D
 
 ```
 Projects/antique/
-  lots/ГГГГ-ММ-ДД-ДОМ-NNN/     # досье лота (code/new-lot.py или вручную)
+  lots/ГГГГ-ММ-ДД-ДОМ-NNN/     # досье лота (`scripts/new-lot.py` плагина или вручную)
     source/listing.md           # описание дома дословно
     source/listing.pdf          # страница лота — аукционы удаляют лоты
     source/house-photos/        # все изображения листинга
