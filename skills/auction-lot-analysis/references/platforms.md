@@ -95,6 +95,21 @@ live.<дом>.com/auctions/past?page=N           # перечень прошед
 Что не работает: HiBid маскирует цены плейсхолдером `123.45` и отдаёт только открытые лоты;
 Bidsquare API отвечает 401; LiveAuctioneers под Incapsula.
 
+## Waki Auction (Осака) / keibay.com — открытый API дома
+
+Дом (和器商会) держит собственную площадку keibay.com (Nuxt): страница лота — оболочка, данные в `window.__NUXT__`
+и в открытом JSON. Проверено 2026-09-06 (лот 2026-09-06-WAKI-056).
+
+- Лот: `https://www.keibay.com/api/auctions/{aid}` (`aid` — хвост URL `keibay.com/auctions/{aid}`). Поля: `name, desc,
+  startPrice, price, bidCount, status` (2 = продан, 1 = не продан), `successfulBidderOffline, realEndDate, imageArray,
+  eventId, eventLot`. Старт = резерв (sell-through 96–97 %).
+- Изображения: `imageArray` даёт пути `/files/<xx>/<hash>/_.jpg` → реальный адрес
+  **`https://cdn.keibay.com/files/<xx>/<hash>/_.jpg`** (на `www.keibay.com` — 404). Оригиналы дома **крупнее**
+  «оригиналов» Invaluable (`_original.jpg`): 5152×7728 против 4276×6414 — сначала CDN дома, потом Invaluable.
+- Архив всех сейлов с молотками: `/api/events` → лоты события; с 2017 г., ~45 000 лотов. `eventCommissionRate`
+  1980 = 19,8 % (JCT внутри). На Invaluable тот же лот с премией 24,8 % = 19,8 % дома + 5 % онлайн-сбор;
+  прямой канал ×1,198.
+
 ## Внешние базы (для тестов провенанса)
 
 См. `market.md`, ступень «внешние базы». Ключевое: **каждый отрицательный результат сопровождается
