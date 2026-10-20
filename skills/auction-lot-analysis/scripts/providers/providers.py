@@ -34,10 +34,34 @@ DEFAULTS = {  # роль → (provider, model)
 READER_MODELS_BANNED = {"glm-4.6v"}   # галлюцинирует на скорописи (пилот 2026-09-06)
 
 
+def _load_shared_secrets():
+    """Ключей нет в окружении (процесс Claude запущен с AGEKEYS_SKIP=1) — подгрузить из общего
+    age-файла через ~/.claude/bin/secrets --export (канон §3). Значения в лог не выводятся."""
+    tool = os.path.expanduser("~/.claude/bin/secrets")
+    if not os.access(tool, os.X_OK):
+        return
+    try:
+        import shlex, subprocess
+        out = subprocess.run([tool, "--export"], capture_output=True, text=True, timeout=30).stdout
+    except Exception:
+        return
+    for line in out.splitlines():
+        if not line.startswith("export ") or "=" not in line:
+            continue
+        name, _, val = line[7:].partition("=")
+        if name in KEYS.values() and not os.environ.get(name):
+            parts = shlex.split(val)
+            if parts:
+                os.environ[name] = parts[0]
+
+
 def _key(provider):
     k = os.environ.get(KEYS[provider])
     if not k:
-        raise SystemExit(f"{KEYS[provider]} не задан в окружении (age-файл / ~/.zshenv)")
+        _load_shared_secrets()
+        k = os.environ.get(KEYS[provider])
+    if not k:
+        raise SystemExit(f"{KEYS[provider]} не задан ни в окружении, ни в общем age-файле (~/.claude/bin/secrets)")
     return k
 
 

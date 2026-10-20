@@ -1,6 +1,6 @@
 ---
 name: auction-lot-analysis
-version: 2.4.3
+version: 2.4.4
 description: >-
   Разбор аукционного лота перед торгами — подлинность, сохранность, цена,
   полная посадочная стоимость и потолок ставки. Расшифровка каталожных
@@ -17,7 +17,7 @@ description: >-
   Also trigger on English phrasing: auction lot, hammer price, estimate,
   provenance, is this authentic, should I bid.
 metadata:
-  version: "2.4.3"
+  version: "2.4.4"
 ---
 
 > **Канон владельца:** `~/.claude/CLAUDE.md` — прочитать перед работой; при конфликте он главнее этого файла. Доступы и ID — `~/.claude/registry.md`.
