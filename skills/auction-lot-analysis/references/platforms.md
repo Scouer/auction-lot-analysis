@@ -36,6 +36,13 @@ catalogRef, priceResult, estimateLow, estimateHigh, artistName, houseName, house
   (`ref`, `catalogId`) на странице каталога.
 - Скан по **всему дому**: заменить фильтр на `houseRef:<REF> AND banned:false`; с `query:"<имя>"` —
   это и есть тест ротации имени (`consignment.md`).
+- **Браузер не нужен** (проверено 2026-10-25, лот HOTSPOT-121, Mac mini): `POST https://www.invaluable.com/catResults`
+  обычным HTTP-клиентом (python `urllib`) с заголовками `Content-Type: application/json`, `Origin: https://www.invaluable.com`,
+  `Referer: https://www.invaluable.com/` и браузерным `User-Agent` отдаёт выдачу; страница лота тоже отдаётся
+  обычным GET (`window.__PRELOADED_STATE__`). Скан дома `houseRef:<REF>` + `query` вернул 290 лотов за 38 сейлов
+  с `priceResult` за один запрос (`hitsPerPage` до 500, страницы `page`). curl с JSON в кавычках shell ломает тело —
+  собирать JSON кодом. Большой `query:""` по всему сейлу один раз упал по таймауту — повторять с `timeout=60`.
+  Смысл `priceResult` (молоток или итог с премией) не проверен.
 - Тело запроса удобнее не собирать вручную, а перехватить: подменить `XMLHttpRequest.prototype.send`,
   вызвать любую пагинацию, взять пойманное тело и переиспользовать с изменёнными `params`.
 
@@ -61,7 +68,7 @@ https://image.invaluable.com/housePhotos/<Дом>/<две последние ц�
 |---|---|---|
 | Обычный HTTP-клиент по `www.invaluable.com` | 202 и 0 байт (бот-защита) | только браузер; CDN картинок при этом доступен напрямую |
 | Встроенный браузер с контент-блокировщиком | бандлы `/search/static/dist/*` → `ERR_BLOCKED_BY_CLIENT`, каталог не гидрируется, `fetch` тоже режется | Chrome-сессия пользователя |
-| Цены проданных лотов | «Sold: Log in to view» | архив под логином; для скана консигнации цены не нужны, доступны из Algolia-выдачи |
+| Цены проданных лотов | «Sold: Log in to view» | `priceResult` в Algolia-выдаче (`/catResults`, без логина) — калибровка канала по дому; 0 = итог не опубликован |
 
 ## LiveAuctioneers
 
