@@ -67,7 +67,10 @@ def photo_b64(ref, url):
     jpg = os.path.join(A.IMGS, ref + ".jpg")
     if not os.path.exists(jpg):
         raw = os.path.join(A.IMGS, ref + ".raw")
-        r = subprocess.run(["/usr/bin/curl", "-sSL", "--max-time", "60", "-o", raw, url], capture_output=True)
+        # 02.11 (security review): только https, без опций из адреса; имя файла — из безопасных символов
+        if not str(url).startswith("https://") or not re.fullmatch(r"[A-Za-z0-9_.-]+", ref or ""):
+            A.log("фото: адрес или имя отклонены: %s" % ref); return ""
+        r = subprocess.run(["/usr/bin/curl", "-sSL", "--proto", "=https", "--proto-redir", "=https", "--max-time", "60", "-o", raw, "--", url], capture_output=True)
         if r.returncode != 0 or not os.path.exists(raw) or os.path.getsize(raw) < 1000:
             A.log("фото не скачалось: %s" % ref); return ""
         subprocess.run(["/usr/bin/sips", "-s", "format", "jpeg", "-Z", "900", raw, "--out", jpg],

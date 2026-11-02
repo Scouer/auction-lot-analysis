@@ -178,7 +178,9 @@ def main():
         # перевозчик может отрапортовать «delivered», а посылки на аккаунте нет
         if (DELIVERED_RX.search(text) and cur_status != "Доставлено на склад форвардера"
                 and cur_status != "Проблема"):
-            same = (not cur_track) or any(t == cur_track for _, t in tracks) or ("qwintry" in frm.lower())
+            # 02.11 (security review): «Qwintry» — только по точному домену отправителя, не по подстроке From
+            _dom = (re.search(r"@([A-Za-z0-9.-]+)>?\s*$", frm or "") or [None, ""])[1].lower()
+            same = (not cur_track) or any(t == cur_track for _, t in tracks) or _dom in ("qwintry.com", "mail.qwintry.com")
             if same:
                 props["Статус доставки"] = A.ssel("Доставлено на склад форвардера")
                 changes.append("%s: доставлено на склад форвардера" % label)
